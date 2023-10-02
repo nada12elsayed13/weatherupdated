@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherupdated/cubits/get_weathe_cubit/get_weather_cubit.dart';
+import 'package:weatherupdated/cubits/get_weathe_cubit/get_weather_states.dart';
 import 'package:weatherupdated/views/homePage.dart';
 
 void main() {
@@ -15,18 +16,20 @@ class WeatherApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => GetWeatherCubit(),
       child: Builder(builder: (context) {
-        return MaterialApp(
-            theme: ThemeData(
-                primarySwatch: getColor(
-                    '${BlocProvider.of<GetWeatherCubit>(context).weatherModel?.weatherCondition}')),
-            debugShowCheckedModeBanner: false,
-            home: const HomePage());
+        return BlocBuilder<GetWeatherCubit, WeatherState>(
+          builder: (context, state) {
+            return MaterialApp(
+                theme: ThemeData(
+                    primarySwatch: getColor(
+                        BlocProvider.of<GetWeatherCubit>(context).weatherModel?.weatherCondition)),
+                debugShowCheckedModeBanner: false,
+                home:const HomePage());
+          },
+        );
       }),
     );
   }
-}
-
-MaterialColor getColor(String? condition) {
+  MaterialColor getColor(String? condition) {
   if (condition == null) {
     return Colors.blue;
   }
@@ -77,7 +80,10 @@ MaterialColor getColor(String? condition) {
       condition == 'moderate or heavy snow with thunder') {
     return Colors.red;
   } else {
-    // Default color for unknown conditions
+    
     return Colors.blue;
   }
 }
+
+}
+

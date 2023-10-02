@@ -30,7 +30,8 @@ class HomePage extends StatelessWidget {
           if (state is WeatherInitialState) {
             return const NoWeatherAPP();
           } else if (state is WeatherLoadedState) {
-            return const InfoWeatherApp(
+            return  InfoWeatherApp(
+              weather: state.weatherModel,
             );
           } else {
             return const Text('OOPS There exists an Error!');
