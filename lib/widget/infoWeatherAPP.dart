@@ -1,16 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weatherupdated/cubits/get_weathe_cubit/get_weather_cubit.dart';
 
 import 'package:weatherupdated/model/weather_model.dart';
 
 class InfoWeatherApp extends StatelessWidget {
   const InfoWeatherApp({
     Key? key,
-    required this.weatherModel,
   }) : super(key: key);
-  final WeatherModel weatherModel;
+  
   @override
   Widget build(BuildContext context) {
+    var weatherModel = BlocProvider.of<GetWeatherCubit>(context).weatherModel;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
