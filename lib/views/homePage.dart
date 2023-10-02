@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weatherupdated/views/searchPage.dart';
-import 'package:weatherupdated/widget/infoWeatherAPP.dart';
 
 import '../widget/noWeatherApp.dart';
 
@@ -22,8 +21,7 @@ class HomePage extends StatelessWidget {
         ],
         title: const Text('Weather App'),
       ),
-      body:
-          weatherModel == null ? const NoWeatherAPP() : const InfoWeatherApp(),
+      body:const NoWeatherAPP() ,
     );
   }
 }
