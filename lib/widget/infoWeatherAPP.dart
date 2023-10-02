@@ -1,15 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-class InfoWeatherApp extends StatelessWidget {
-  const InfoWeatherApp({super.key});
+import 'package:weatherupdated/model/weather_model.dart';
 
+class InfoWeatherApp extends StatelessWidget {
+  const InfoWeatherApp({
+    Key? key,
+    required this.weatherModel,
+  }) : super(key: key);
+  final WeatherModel weatherModel;
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          'Alexandria',
+          Text(
+          weatherModel.cityName,
           style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
