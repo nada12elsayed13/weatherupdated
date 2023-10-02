@@ -7,12 +7,12 @@ import '../../model/weather_model.dart';
 
 class GetWeatherCubit extends Cubit<WeatherState> {
   GetWeatherCubit() : super(WeatherInitialState());
-  late WeatherModel weatherModel;
+    WeatherModel? weatherModel;
   getWeather({required String cityName}) async {
     try {
         weatherModel =
           await WeatherServices(Dio()).getCurrentWeather(cityName: cityName);
-      emit(WeatherLoadedState(weatherModel: weatherModel));
+      emit(WeatherLoadedState(weatherModel: weatherModel!));
     } catch (e) {
       emit(WeatherFailureState(errorMessage: e.toString()));
     }
