@@ -19,7 +19,7 @@ class SearchPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TextField(
             onSubmitted: (value) async {
-              WeatherModel weatherModel = await WeatherServices(Dio())
+                weatherModel = await WeatherServices(Dio())
                   .getCurrentWeather(cityName: value);
                   Navigator.pop(context);
             },
@@ -37,3 +37,4 @@ class SearchPage extends StatelessWidget {
     );
   }
 }
+WeatherModel? weatherModel;

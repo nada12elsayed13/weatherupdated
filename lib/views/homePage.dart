@@ -6,7 +6,6 @@ import '../widget/noWeatherApp.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +22,8 @@ class HomePage extends StatelessWidget {
         ],
         title: const Text('Weather App'),
       ),
-      body: const NoWeatherAPP(),
+      body:
+          weatherModel == null ? const NoWeatherAPP() : const InfoWeatherApp(),
     );
   }
 }
