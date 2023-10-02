@@ -3,59 +3,76 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherupdated/cubits/get_weathe_cubit/get_weather_cubit.dart';
 
-import 'package:weatherupdated/model/weather_model.dart';
-
 class InfoWeatherApp extends StatelessWidget {
   const InfoWeatherApp({
     Key? key,
   }) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     var weatherModel = BlocProvider.of<GetWeatherCubit>(context).weatherModel;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           Text(
-          weatherModel.cityName,
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
+            weatherModel.cityName,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const Text(
-          'updated at : 23:64',
-          style: TextStyle(
-            fontSize: 22,
+            Text(
+            'updated at ${weatherModel.date.hour}:${weatherModel.date.minute}',
+            style:const TextStyle(
+              fontSize: 24,
+            ),
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset('assets/images/snow.png'),
-            const Text(
-              '17',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+          const SizedBox(
+            height: 32,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.network('https:${weatherModel.image}'),
+              Text(
+                weatherModel.temp.toString(),
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const Column(
-              children: [
-                Text('maxTemp :24'),
-                Text('minTemp :16 '),
-              ],
-            ),
-          ],
-        ),
-        const Text(
-          'Light Rain',
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
+              Column(
+                children: [
+                  Text(
+                    'maxTemp :${weatherModel.maxTemp.round()}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    'minTemp :${weatherModel.minTemp.round()} ',
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ),
-      ],
+          const SizedBox(
+            height: 32,
+          ),
+          Text(
+            '${weatherModel.weatherCondition}',
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
