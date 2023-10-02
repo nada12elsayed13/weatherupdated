@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weatherupdated/cubits/get_weathe_cubit/get_weather_cubit.dart';
+import 'package:weatherupdated/cubits/get_weathe_cubit/get_weather_states.dart';
 import 'package:weatherupdated/views/searchPage.dart';
+import 'package:weatherupdated/widget/infoWeatherAPP.dart';
 
 import '../widget/noWeatherApp.dart';
 
@@ -21,7 +25,17 @@ class HomePage extends StatelessWidget {
         ],
         title: const Text('Weather App'),
       ),
-      body:const NoWeatherAPP() ,
+      body: BlocBuilder<GetWeatherCubit, WeatherState>(
+        builder: (context, state) {
+          if (state is WeatherInitialState) {
+            return const NoWeatherAPP();
+          } else if (state is WeatherLoadedState) {
+            return const InfoWeatherApp();
+          } else {
+            return const Text('OOPS There exists an Error!');
+          }
+        },
+      ),
     );
   }
 }
